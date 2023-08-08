@@ -9,11 +9,11 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-const newItem = ref(null);
-const items = ref([]);
+const newItem = ref<string>("");
+const items = ref<string[]>([]);
 
-const addItem = () => {
-  items.value.push(newItem.value);
+const addItem = (newItemValue: string) => {
+  items.value.push(newItemValue);
   newItem.value = "";
 };
 </script>
