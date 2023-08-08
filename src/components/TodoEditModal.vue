@@ -3,25 +3,29 @@
     <div class="modal">
       <input v-model="editedText" type="text" />
       <button @click="saveEdit">Save</button>
-      <!-- <button @click="closeEdit">Cancel</button> -->
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { inject, ref } from "vue";
 
 const props = defineProps<{
   originalText: string;
+  index: number;
 }>();
-
-const emit = defineEmits(["editItem", "closeEditModal"]);
+const emit = defineEmits(["closeEditModal"]);
+const editItem = inject<
+  ((index: number, editedText: string) => void) | undefined
+>("editItem");
 
 const editedText = ref(props.originalText);
 
 const saveEdit = () => {
-  emit("editItem", editedText.value);
-  console.log("save");
+  if (editItem) {
+    editItem(props.index, editedText.value);
+    closeEditModal();
+  }
 };
 
 const closeEditModal = () => {

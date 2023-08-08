@@ -6,14 +6,14 @@
         v-for="(todoItem, index) in todoItems"
         :key="index"
         :todoItem="todoItem"
-        @editItem="editItem(index, $event)"
+        :index="index"
       />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { provide, ref } from "vue";
 import TodoInput from "@/components/TodoInput.vue";
 import TodoItem from "@/components/TodoItem.vue";
 
@@ -26,6 +26,8 @@ const addItem = (newItem: string) => {
 const editItem = (index: number, newText: string) => {
   todoItems.value[index].todoText = newText;
 };
+
+provide("editItem", editItem);
 </script>
 
 <style>

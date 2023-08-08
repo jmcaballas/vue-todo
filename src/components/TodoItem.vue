@@ -1,11 +1,12 @@
 <template>
   <div class="todo-item">
     <h2 class="text">{{ props.todoItem.todoText }}</h2>
-    <button @click="openEditModal" class="edit">Edit</button>
     <input type="checkbox" :checked="props.todoItem.done" class="check" />
+    <button @click="openEditModal" class="edit">Edit</button>
     <TodoEditModal
       v-if="showEditModal"
       :originalText="props.todoItem.todoText"
+      :index="props.index"
       @closeEditModal="closeEditModal"
     />
   </div>
@@ -20,6 +21,7 @@ const props = defineProps<{
     todoText: string;
     done: boolean;
   };
+  index: number;
 }>();
 
 const showEditModal = ref(false);
@@ -31,11 +33,6 @@ const openEditModal = () => {
 const closeEditModal = () => {
   showEditModal.value = false;
 };
-
-// const editItem = (newText: string) => {
-//   emit("editTodoItem", newText);
-//   closeEditModal();
-// };
 </script>
 
 <style>
