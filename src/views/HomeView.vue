@@ -1,15 +1,18 @@
 <template>
   <div class="home">
     <TodoInput @addItem="addItem" />
-    <div v-for="item in todoItems" :key="item">
-      <h1>{{ item }}</h1>
-    </div>
+    <TodoItem
+      v-for="(todoItem, index) in todoItems"
+      :key="index"
+      :item="todoItem"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
 import TodoInput from "@/components/TodoInput.vue";
+import TodoItem from "@/components/TodoItem.vue";
 
 const todoItems = ref<string[]>([]);
 
