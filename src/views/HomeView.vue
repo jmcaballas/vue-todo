@@ -6,6 +6,7 @@
         v-for="(todoItem, index) in todoItems"
         :key="index"
         :todoItem="todoItem"
+        @editItem="editItem(index, $event)"
       />
     </div>
   </div>
@@ -20,6 +21,10 @@ const todoItems = ref<Array<{ todoText: string; done: boolean }>>([]);
 
 const addItem = (newItem: string) => {
   todoItems.value.push({ todoText: newItem, done: false });
+};
+
+const editItem = (index: number, newText: string) => {
+  todoItems.value[index].todoText = newText;
 };
 </script>
 
