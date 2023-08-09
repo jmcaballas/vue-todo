@@ -1,7 +1,9 @@
 <template>
   <div class="todo-item">
-    <h2 class="text">{{ props.todoItem.todoText }}</h2>
-    <input type="checkbox" :checked="props.todoItem.done" class="check" />
+    <h2 class="text" :class="{ done: props.todoItem.done }">
+      {{ props.todoItem.todoText }}
+    </h2>
+    <input type="checkbox" v-model="isDone" class="check" />
     <button @click="openEditModal" class="edit">Edit</button>
     <TodoEditModal
       v-if="showEditModal"
@@ -13,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import TodoEditModal from "@/components/TodoEditModal.vue";
 
 const props = defineProps<{
@@ -23,8 +25,18 @@ const props = defineProps<{
   };
   index: number;
 }>();
+const emit = defineEmits(["editDone"]);
 
 const showEditModal = ref(false);
+
+const isDone = computed({
+  get() {
+    return props.todoItem.done;
+  },
+  set() {
+    emit("editDone", props.index, !props.todoItem.done);
+  },
+});
 
 const openEditModal = () => {
   showEditModal.value = true;
@@ -46,6 +58,9 @@ const closeEditModal = () => {
 }
 .text {
   flex: 4;
+}
+.done {
+  text-decoration: line-through;
 }
 .edit {
   flex: 1;

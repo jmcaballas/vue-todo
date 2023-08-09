@@ -7,6 +7,7 @@
         :key="index"
         :todoItem="todoItem"
         :index="index"
+        @editDone="editDone"
       />
     </div>
   </div>
@@ -28,6 +29,11 @@ const addItem = (newItem: string) => {
 
 const editItem = (index: number, newText: string) => {
   todoItems.value[index].todoText = newText;
+  saveToLocalStorage();
+};
+
+const editDone = (index: number, newDone: boolean) => {
+  todoItems.value[index].done = newDone;
   saveToLocalStorage();
 };
 
