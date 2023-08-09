@@ -1,8 +1,10 @@
 <template>
   <div class="backdrop" @click.self="closeEditModal">
     <div class="modal">
-      <input v-model="editedText" type="text" />
-      <button @click="saveEdit">Save</button>
+      <form @submit.prevent="saveEdit">
+        <input v-model="editedText" type="text" />
+        <button>Save</button>
+      </form>
     </div>
   </div>
 </template>
