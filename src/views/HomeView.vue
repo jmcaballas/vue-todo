@@ -1,16 +1,15 @@
 <template>
-  <div class="home">
+  <div class="container mx-auto prose text-center">
+    <h1 class="mt-4">Todo App</h1>
     <TodoInput @addItem="addItem" />
-    <div class="todo-item-container">
-      <TodoItem
-        v-for="(todoItem, index) in todoItems"
-        :key="index"
-        :todoItem="todoItem"
-        :index="index"
-        @editDone="editDone"
-        @deleteItem="deleteItem"
-      />
-    </div>
+    <TodoItem
+      v-for="(todoItem, index) in todoItems"
+      :key="index"
+      :todoItem="todoItem"
+      :index="index"
+      @editDone="editDone"
+      @deleteItem="deleteItem"
+    />
   </div>
 </template>
 
@@ -58,11 +57,3 @@ onMounted(() => {
 
 provide("editItem", editItem);
 </script>
-
-<style>
-.todo-item-container {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-</style>

@@ -1,10 +1,17 @@
 <template>
-  <form @submit.prevent="addItem">
-    <input v-model="newItem" type="text" />
-    <button>Add</button>
-  </form>
-  <div v-for="item in items" :key="item">
-    <h2>{{ item }}</h2>
+  <div class="container mx-auto my-8">
+    <form
+      @submit.prevent="addItem"
+      class="flex justify-between items-center space-x-4"
+    >
+      <input
+        v-model="newItem"
+        type="text"
+        class="input w-full input-bordered"
+        placeholder="Add item"
+      />
+      <button class="btn btn-primary">Add</button>
+    </form>
   </div>
 </template>
 
@@ -12,7 +19,6 @@
 import { ref } from "vue";
 
 const newItem = ref<string>("");
-const items = ref<string[]>([]);
 
 const emit = defineEmits(["addItem"]);
 

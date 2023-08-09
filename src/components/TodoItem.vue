@@ -1,11 +1,11 @@
 <template>
-  <div class="todo-item">
-    <h2 class="text" :class="{ done: props.todoItem.done }">
+  <div class="flex justify-between items-center my-4">
+    <h3 class="basis-1/2 mt-3 text-left" :class="{ done: props.todoItem.done }">
       {{ props.todoItem.todoText }}
-    </h2>
-    <input type="checkbox" v-model="isDone" class="check" />
-    <button @click="openEditModal" class="edit">Edit</button>
-    <button @click="deleteItem" class="delete">Delete</button>
+    </h3>
+    <input type="checkbox" v-model="isDone" class="checkbox" />
+    <button @click="openEditModal" class="btn btn-accent">Edit</button>
+    <button @click="deleteItem" class="btn btn-secondary">Delete</button>
     <TodoEditModal
       v-if="showEditModal"
       :originalText="props.todoItem.todoText"
@@ -53,24 +53,14 @@ const closeEditModal = () => {
 </script>
 
 <style>
-.todo-item {
+/* .todo-item {
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 400px;
   margin: 10px 0;
-  background: rgba(185, 156, 156, 0.185);
-}
-.text {
-  flex: 4;
-}
+} */
 .done {
   text-decoration: line-through;
-}
-.edit {
-  flex: 1;
-}
-.check {
-  flex: 1;
 }
 </style>
