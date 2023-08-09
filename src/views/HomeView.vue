@@ -1,6 +1,7 @@
 <template>
   <div class="container mx-auto px-5 prose text-center">
     <h1 class="mt-4">Todo App</h1>
+    <input @click="toggleTheme" type="checkbox" class="toggle" />
     <TodoInput @addItem="addItem" />
     <TodoItem
       v-for="(todoItem, index) in todoItems"
@@ -14,9 +15,23 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, provide, ref } from "vue";
+import { onMounted, provide, ref, watch } from "vue";
 import TodoInput from "@/components/TodoInput.vue";
 import TodoItem from "@/components/TodoItem.vue";
+
+const theme = ref("pastel");
+
+const toggleTheme = () => {
+  theme.value = theme.value === "night" ? "pastel" : "night";
+};
+
+onMounted(() => {
+  document.querySelector("html")?.setAttribute("data-theme", theme.value);
+});
+
+watch(theme, (newTheme) => {
+  document.querySelector("html")?.setAttribute("data-theme", newTheme);
+});
 
 const todoItems = ref<Array<{ todoText: string; done: boolean }>>(
   JSON.parse(localStorage.getItem("todoItems") || "[]") || []

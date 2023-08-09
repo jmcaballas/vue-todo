@@ -1,6 +1,6 @@
 <template>
   <div class="backdrop" @click.self="closeEditModal">
-    <div class="modal-form">
+    <div class="modal-form card w-96 bg-base-100">
       <form @submit.prevent="saveEdit">
         <input
           v-model="editedText"
@@ -57,7 +57,7 @@ const closeEditModal = () => {
   width: 400px;
   margin: 0 20px;
   padding: 20px;
-  background: white;
+  /* background: white; */
   border-radius: 10px;
 }
 </style>
