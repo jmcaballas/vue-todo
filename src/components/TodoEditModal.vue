@@ -1,9 +1,13 @@
 <template>
   <div class="backdrop" @click.self="closeEditModal">
-    <div class="modal">
+    <div class="modal-form">
       <form @submit.prevent="saveEdit">
-        <input v-model="editedText" type="text" />
-        <button>Save</button>
+        <input
+          v-model="editedText"
+          type="text"
+          class="input w-full input-bordered"
+        />
+        <button class="btn btn-primary mt-5">Save</button>
       </form>
     </div>
   </div>
@@ -38,15 +42,21 @@ const closeEditModal = () => {
 <style>
 .backdrop {
   top: 0;
+  right: 0;
   position: fixed;
-  background: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
 }
-.modal {
+
+.modal-form {
   width: 400px;
+  margin: 0 20px;
   padding: 20px;
-  margin: 100px auto;
   background: white;
   border-radius: 10px;
 }
