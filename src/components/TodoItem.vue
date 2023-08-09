@@ -1,6 +1,9 @@
 <template>
-  <div class="flex justify-between items-center my-4">
-    <h3 class="basis-1/2 mt-3 text-left" :class="{ done: props.todoItem.done }">
+  <div class="flex justify-between items-center my-4 space-x-3">
+    <h3
+      class="shrink basis-1/2 mt-3 text-left [overflow-wrap:anywhere]"
+      :class="{ done: props.todoItem.done }"
+    >
       {{ props.todoItem.todoText }}
     </h3>
     <input type="checkbox" v-model="isDone" class="checkbox" />

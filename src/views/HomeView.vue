@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto prose text-center">
+  <div class="container mx-auto px-5 prose text-center">
     <h1 class="mt-4">Todo App</h1>
     <TodoInput @addItem="addItem" />
     <TodoItem
