@@ -8,6 +8,7 @@
         :todoItem="todoItem"
         :index="index"
         @editDone="editDone"
+        @deleteItem="deleteItem"
       />
     </div>
   </div>
@@ -34,6 +35,11 @@ const editItem = (index: number, newText: string) => {
 
 const editDone = (index: number, newDone: boolean) => {
   todoItems.value[index].done = newDone;
+  saveToLocalStorage();
+};
+
+const deleteItem = (index: number) => {
+  todoItems.value.splice(index, 1);
   saveToLocalStorage();
 };
 

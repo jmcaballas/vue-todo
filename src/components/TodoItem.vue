@@ -5,6 +5,7 @@
     </h2>
     <input type="checkbox" v-model="isDone" class="check" />
     <button @click="openEditModal" class="edit">Edit</button>
+    <button @click="deleteItem" class="delete">Delete</button>
     <TodoEditModal
       v-if="showEditModal"
       :originalText="props.todoItem.todoText"
@@ -25,7 +26,7 @@ const props = defineProps<{
   };
   index: number;
 }>();
-const emit = defineEmits(["editDone"]);
+const emit = defineEmits(["deleteItem", "editDone"]);
 
 const showEditModal = ref(false);
 
@@ -37,6 +38,10 @@ const isDone = computed({
     emit("editDone", props.index, !props.todoItem.done);
   },
 });
+
+const deleteItem = () => {
+  emit("deleteItem", props.index);
+};
 
 const openEditModal = () => {
   showEditModal.value = true;
