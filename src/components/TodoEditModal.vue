@@ -14,24 +14,22 @@
 </template>
 
 <script setup lang="ts">
-import { inject, ref } from "vue";
+import { ref } from "vue";
+import { useTodoStore } from "@/store/todo";
+
+const todo = useTodoStore();
 
 const props = defineProps<{
   originalText: string;
   index: number;
 }>();
 const emit = defineEmits(["closeEditModal"]);
-const editItem = inject<
-  ((index: number, editedText: string) => void) | undefined
->("editItem");
 
 const editedText = ref(props.originalText);
 
 const saveEdit = () => {
-  if (editItem) {
-    editItem(props.index, editedText.value);
-    closeEditModal();
-  }
+  todo.editText(props.index, editedText.value);
+  closeEditModal();
 };
 
 const closeEditModal = () => {
@@ -57,7 +55,6 @@ const closeEditModal = () => {
   width: 400px;
   margin: 0 20px;
   padding: 20px;
-  /* background: white; */
   border-radius: 10px;
 }
 </style>

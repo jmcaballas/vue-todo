@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto my-8">
     <form
-      @submit.prevent="addItem"
+      @submit.prevent="todo.addItem(newItem)"
       class="flex justify-between items-center space-x-4"
     >
       <input
@@ -17,13 +17,9 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { useTodoStore } from "@/store/todo";
+
+const todo = useTodoStore();
 
 const newItem = ref<string>("");
-
-const emit = defineEmits(["addItem"]);
-
-const addItem = () => {
-  emit("addItem", newItem.value);
-  newItem.value = "";
-};
 </script>
