@@ -19,7 +19,7 @@ import TodoInput from "@/components/TodoInput.vue";
 import TodoItem from "@/components/TodoItem.vue";
 
 const todo = useTodoStore();
-const theme = ref("pastel");
+const theme = ref(localStorage.getItem("theme") || "pastel");
 
 const toggleTheme = () => {
   theme.value = theme.value === "night" ? "pastel" : "night";
@@ -31,5 +31,6 @@ onMounted(() => {
 
 watch(theme, (newTheme) => {
   document.querySelector("html")?.setAttribute("data-theme", newTheme);
+  localStorage.setItem("theme", newTheme);
 });
 </script>
